@@ -1,39 +1,16 @@
-extends Node2D  # Ou Sprite2D
+extends Node2D
 
-# Posições relativas ao personagem
-var default_offset = Vector2(-30, 0)  # Posição ao lado do personagem
-var defense_offset = Vector2(0, 50)   # Posição na frente do personagem
-
-# Rotação padrão e de defesa
-var default_rotation: float = 0.0  # Sem rotação
-var defense_rotation: float = -90.0  # Rotação de -90 graus
-
-# Velocidade de suavização
-var move_speed = 10.0  # Velocidade de movimento
-var rotation_speed = 5.0  # Velocidade de rotação
-
-# Referência ao personagem (arraste o nó do personagem para esta variável no editor)
-@export var personagem: CharacterBody2D
+@onready var tween: Tween = null  # Variável para armazenar o Tween
 
 func _physics_process(delta):
-	if not personagem:
-		return  # Se não houver personagem, não faz nada
+	if Input.is_action_just_pressed("mouse_right"):
+		rotate_shield(-90)
+	elif Input.is_action_just_released("mouse_right"):
+		rotate_shield(90)
 
-	# Verifica se o input está sendo detectado
-	if Input.is_action_pressed("mouse_right"):
-		print("Botão direito do mouse pressionado!")  # Debug
-		move_and_rotate(defense_offset, defense_rotation, delta)
-	else:
-		print("Botão direito do mouse NÃO pressionado!")  # Debug
-		move_and_rotate(default_offset, default_rotation, delta)
+func rotate_shield(angle):
+	if tween and tween.is_running():  # Para evitar conflitos
+		tween.kill()
 
-func move_and_rotate(target_offset: Vector2, target_rotation: float, delta: float):
-	# Calcula a posição alvo global
-	var target_position = personagem.position + target_offset
-
-	# Suaviza o movimento
-	global_position = global_position.move_toward(target_position, move_speed * delta)
-
-	# Suaviza a rotação
-	var rotation_difference = deg_to_rad(target_rotation) - rotation
-	rotation += rotation_difference * rotation_speed * delta
+	tween = get_tree().create_tween()  # Cria um novo Tween
+	tween.tween_property(self, "rotation_degrees", rotation_degrees + angle, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
