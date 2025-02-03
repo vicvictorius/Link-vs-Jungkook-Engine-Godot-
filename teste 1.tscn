@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bif6caisusvmg"]
+[gd_scene load_steps=13 format=3 uid="uid://bif6caisusvmg"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_f38pu"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="2_22t1k"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ejakk5kepfje" path="res://sprites/link passo 2.png" id="4_251s4"]
 [ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="5_3jeb7"]
 [ext_resource type="Script" path="res://shield.gd" id="5_f81rc"]
+[ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="7_g52r8"]
+[ext_resource type="Script" path="res://sword.gd" id="7_lwhx8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3k0x1"]
 animations = [{
@@ -35,6 +37,9 @@ size = Vector2(30, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ghh8"]
 size = Vector2(10, 54)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xpr0"]
+size = Vector2(54, 10)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="link" type="CharacterBody2D" parent="."]
@@ -52,16 +57,30 @@ frame_progress = 0.736139
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_wfycs")
 
-[node name="shield" type="CharacterBody2D" parent="link"]
-position = Vector2(0, 1)
+[node name="shield" type="CharacterBody2D" parent="."]
+position = Vector2(563, 307)
 script = ExtResource("5_f81rc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="link/shield"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shield"]
 position = Vector2(-29, -2)
 shape = SubResource("RectangleShape2D_7ghh8")
 
-[node name="Sprite2D" type="Sprite2D" parent="link/shield"]
+[node name="Sprite2D" type="Sprite2D" parent="shield"]
 texture_filter = 1
 position = Vector2(-28, -0.999999)
 scale = Vector2(1.35938, 1.35938)
 texture = ExtResource("5_3jeb7")
+
+[node name="sword" type="CharacterBody2D" parent="."]
+position = Vector2(563, 306)
+script = ExtResource("7_lwhx8")
+
+[node name="Sprite2D" type="Sprite2D" parent="sword"]
+texture_filter = 1
+position = Vector2(55, 0)
+rotation = 0.789106
+texture = ExtResource("7_g52r8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
+position = Vector2(65, 0)
+shape = SubResource("RectangleShape2D_6xpr0")
