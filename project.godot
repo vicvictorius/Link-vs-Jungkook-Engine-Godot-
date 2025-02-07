@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="projeto unilehu"
-run/main_scene="res://teste 1.tscn"
+run/main_scene="res://Spawn.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 

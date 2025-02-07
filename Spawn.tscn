@@ -1,18 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://bif6caisusvmg"]
+[gd_scene load_steps=19 format=3 uid="uid://bif6caisusvmg"]
 
-[ext_resource type="Script" path="res://character_body_2d.gd" id="1_f38pu"]
-[ext_resource type="Script" path="res://camera_2d.gd" id="1_tm81j"]
-[ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="2_22t1k"]
-[ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="3_211nj"]
-[ext_resource type="Texture2D" uid="uid://ejakk5kepfje" path="res://sprites/link passo 2.png" id="4_251s4"]
-[ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="5_3jeb7"]
-[ext_resource type="Script" path="res://shield.gd" id="5_f81rc"]
-[ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="7_g52r8"]
-[ext_resource type="Script" path="res://sword.gd" id="7_lwhx8"]
-[ext_resource type="Texture2D" uid="uid://bfacs8unjt1ch" path="res://sprites/hyrule field.png" id="9_oc58w"]
+[ext_resource type="Texture2D" uid="uid://bfacs8unjt1ch" path="res://sprites/hyrule field.png" id="1_3nasj"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="2_v53y5"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="3_43ebo"]
+[ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="4_m5bg4"]
+[ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="5_06fu8"]
+[ext_resource type="Texture2D" uid="uid://ejakk5kepfje" path="res://sprites/link passo 2.png" id="6_e2li5"]
+[ext_resource type="Script" path="res://shield.gd" id="7_rpc58"]
+[ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="8_3r3b0"]
+[ext_resource type="Script" path="res://sword.gd" id="9_rw3fj"]
+[ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="10_sx5bp"]
+[ext_resource type="Script" path="res://door.gd" id="11_0vy8x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m2i0g"]
-texture = ExtResource("9_oc58w")
+texture = ExtResource("1_3nasj")
 margins = Vector2i(1, 1)
 use_texture_padding = false
 0:0/0 = 0
@@ -3417,7 +3418,7 @@ sources/0 = SubResource("TileSetAtlasSource_m2i0g")
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_22t1k")
+"texture": ExtResource("4_m5bg4")
 }],
 "loop": true,
 "name": &"default",
@@ -3425,10 +3426,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_211nj")
+"texture": ExtResource("5_06fu8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_251s4")
+"texture": ExtResource("6_e2li5")
 }],
 "loop": true,
 "name": &"link walking",
@@ -3443,6 +3444,9 @@ size = Vector2(10, 38)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xpr0"]
 size = Vector2(40, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42u7e"]
+size = Vector2(63, 20)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -3454,15 +3458,11 @@ layer_0/tile_data = PackedInt32Array(-196610, 3735552, 26, -131074, 3801088, 24,
 layer_1/name = "Parede"
 layer_1/tile_data = PackedInt32Array(851995, 3080192, 28, 917531, 3080192, 28, 983067, 3080192, 28, 1048603, 3080192, 28, 1114139, 3080192, 28, 1179675, 3080192, 28, 1245211, 3080192, 28, 1310747, 3080192, 28, 1376283, 3080192, 28, 1441819, 3080192, 28, 1507355, 3080192, 28, 1572891, 3080192, 28, 1638427, 3080192, 28, 1703963, 3080192, 28, 1769499, 3080192, 28, 1835035, 3080192, 28, 1900571, 3080192, 28, 1966107, 3080192, 28, 2031643, 3080192, 28, 2097179, 1376256, 268435473, 852011, 2228224, 26, 917547, 2228224, 26, 983083, 2228224, 26, 1048619, 2228224, 26, 1114155, 2228224, 26, 1179691, 2228224, 26, 1245227, 2228224, 26, 1310763, 2228224, 26, 1376299, 2228224, 26, 1441835, 2228224, 26, 1507371, 2228224, 26, 1572907, 2228224, 26, 1638443, 2228224, 26, 1703979, 2228224, 26, 1769515, 2228224, 26, 1835051, 2228224, 26, 1900587, 2228224, 26, 1966123, 2228224, 26, 2031659, 2228224, 26, 2097195, 1376256, 17, 720924, 458752, 12, 786460, 458752, 13, 720925, 524288, 12, 786461, 524288, 13, 720926, 589824, 12, 786462, 589824, 13, 720927, 458752, 12, 786463, 458752, 13, 720928, 524288, 12, 786464, 524288, 13, 720935, 589824, 12, 786471, 589824, 13, 720936, 458752, 12, 786472, 458752, 13, 720937, 524288, 12, 786473, 524288, 13, 720938, 589824, 12, 786474, 589824, 13, 720939, 1441792, 9, 786475, 1441792, 10, 720923, 1441792, 268435465, 786459, 1441792, 268435466, 2162731, 1376256, 18, 2162715, 1376256, 268435474, 2162716, 1048576, 18, 2162717, 1114112, 18, 2162718, 1179648, 18, 2162719, 1245184, 18, 2162720, 1310720, 18, 2162721, 1048576, 18, 2162722, 1114112, 18, 2162723, 1179648, 18, 2162724, 1245184, 18, 2162725, 1310720, 18, 2162726, 1048576, 18, 2162727, 1114112, 18, 2162728, 1179648, 18, 2162729, 1245184, 18, 2162730, 1310720, 18, 720934, 917504, 9, 786470, 917504, 10, 720929, 917504, 268435465, 786465, 917504, 268435466)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(566, 277)
-script = ExtResource("1_tm81j")
-
 [node name="link" type="CharacterBody2D" parent="."]
 position = Vector2(563, 306)
 collision_layer = 3
 collision_mask = 3
-script = ExtResource("1_f38pu")
+script = ExtResource("3_43ebo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="link"]
 texture_filter = 1
@@ -3470,7 +3470,6 @@ position = Vector2(-2.28882e-05, 1.00001)
 scale = Vector2(1.10156, 1.10156)
 sprite_frames = SubResource("SpriteFrames_3k0x1")
 animation = &"link walking"
-frame_progress = 0.736139
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="link"]
 position = Vector2(0, 1)
@@ -3478,7 +3477,7 @@ shape = SubResource("RectangleShape2D_wfycs")
 
 [node name="shield" type="CharacterBody2D" parent="."]
 position = Vector2(563, 307)
-script = ExtResource("5_f81rc")
+script = ExtResource("7_rpc58")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield"]
 position = Vector2(-22, 1)
@@ -3488,19 +3487,33 @@ shape = SubResource("RectangleShape2D_7ghh8")
 texture_filter = 1
 position = Vector2(-23, 0.99999)
 scale = Vector2(0.86719, 0.86719)
-texture = ExtResource("5_3jeb7")
+texture = ExtResource("8_3r3b0")
 
 [node name="sword" type="CharacterBody2D" parent="."]
 position = Vector2(563, 306)
-script = ExtResource("7_lwhx8")
+script = ExtResource("9_rw3fj")
 
 [node name="Sprite2D" type="Sprite2D" parent="sword"]
 texture_filter = 1
 position = Vector2(39.4875, -0.057518)
 rotation = 0.789106
 scale = Vector2(0.657217, 0.657217)
-texture = ExtResource("7_g52r8")
+texture = ExtResource("10_sx5bp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
 position = Vector2(45, 0)
 shape = SubResource("RectangleShape2D_6xpr0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(566, 277)
+script = ExtResource("2_v53y5")
+
+[node name="door" type="Area2D" parent="."]
+position = Vector2(577, 55)
+script = ExtResource("11_0vy8x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door"]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_42u7e")
+
+[connection signal="body_entered" from="door" to="door" method="_on_body_entered"]
