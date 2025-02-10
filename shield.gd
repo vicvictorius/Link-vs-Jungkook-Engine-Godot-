@@ -1,39 +1,23 @@
-extends Node2D  # Ou Sprite2D
+extends Node2D
 
-# Posições relativas ao personagem
-var default_offset = Vector2(-30, 0)  # Posição ao lado do personagem
-var defense_offset = Vector2(0, 50)   # Posição na frente do personagem
-
-# Rotação padrão e de defesa
-var default_rotation: float = 0.0  # Sem rotação
-var defense_rotation: float = -90.0  # Rotação de -90 graus
-
-# Velocidade de suavização
-var move_speed = 10.0  # Velocidade de movimento
-var rotation_speed = 5.0  # Velocidade de rotação
-
-# Referência ao personagem (arraste o nó do personagem para esta variável no editor)
-@export var personagem: CharacterBody2D
+var tween: Tween
+@onready var link = $"../link"  # Referência ao objeto "link"
 
 func _physics_process(delta):
-	if not personagem:
-		return  # Se não houver personagem, não faz nada
-
-	# Verifica se o input está sendo detectado
+	global_position = link.global_position  # Segue a posição do link
+	look_at_mouse()
+	
 	if Input.is_action_pressed("mouse_right"):
-		print("Botão direito do mouse pressionado!")  # Debug
-		move_and_rotate(defense_offset, defense_rotation, delta)
-	else:
-		print("Botão direito do mouse NÃO pressionado!")  # Debug
-		move_and_rotate(default_offset, default_rotation, delta)
+		rotation += 80
 
-func move_and_rotate(target_offset: Vector2, target_rotation: float, delta: float):
-	# Calcula a posição alvo global
-	var target_position = personagem.position + target_offset
 
-	# Suaviza o movimento
-	global_position = global_position.move_toward(target_position, move_speed * delta)
-
-	# Suaviza a rotação
-	var rotation_difference = deg_to_rad(target_rotation) - rotation
-	rotation += rotation_difference * rotation_speed * delta
+func look_at_mouse():
+	# Obtém a posição do mouse na tela
+	var mouse_position = get_global_mouse_position()
+	
+	# Calcula o ângulo entre a posição do personagem e a posição do mouse
+	var direction = (mouse_position - global_position).normalized()
+	var angle = direction.angle()
+	
+	# Aplica a rotação ao personagem com um offset de 90 graus
+	rotation = angle + deg_to_rad(-90)
