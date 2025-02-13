@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bif6caisusvmg"]
+[gd_scene load_steps=20 format=3 uid="uid://bif6caisusvmg"]
 
 [ext_resource type="Texture2D" uid="uid://bfacs8unjt1ch" path="res://sprites/hyrule field.png" id="1_3nasj"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_v53y5"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://sword.gd" id="9_rw3fj"]
 [ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="10_sx5bp"]
 [ext_resource type="Script" path="res://door.gd" id="11_0vy8x"]
+[ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="12_816xr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m2i0g"]
 texture = ExtResource("1_3nasj")
@@ -3515,5 +3516,29 @@ script = ExtResource("11_0vy8x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door"]
 position = Vector2(-1.5, 0)
 shape = SubResource("RectangleShape2D_42u7e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HeartsContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 10.0
+offset_right = 9622.0
+offset_bottom = 2400.0
+scale = Vector2(0.01, 0.01)
+
+[node name="hearts" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("12_816xr")
+
+[node name="hearts2" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("12_816xr")
+
+[node name="hearts3" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("12_816xr")
+
+[node name="hearts4" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("12_816xr")
 
 [connection signal="body_entered" from="door" to="door" method="_on_body_entered"]
