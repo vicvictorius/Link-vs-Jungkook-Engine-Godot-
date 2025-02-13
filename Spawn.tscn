@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bif6caisusvmg"]
+[gd_scene load_steps=19 format=3 uid="uid://btvayf4jrww8q"]
 
 [ext_resource type="Texture2D" uid="uid://bfacs8unjt1ch" path="res://sprites/hyrule field.png" id="1_3nasj"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_v53y5"]
@@ -3460,8 +3460,8 @@ layer_1/tile_data = PackedInt32Array(851995, 3080192, 28, 917531, 3080192, 28, 9
 
 [node name="link" type="CharacterBody2D" parent="."]
 position = Vector2(563, 306)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("3_43ebo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="link"]
@@ -3477,6 +3477,8 @@ shape = SubResource("RectangleShape2D_wfycs")
 
 [node name="shield" type="CharacterBody2D" parent="."]
 position = Vector2(563, 307)
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("7_rpc58")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield"]
@@ -3491,6 +3493,8 @@ texture = ExtResource("8_3r3b0")
 
 [node name="sword" type="CharacterBody2D" parent="."]
 position = Vector2(563, 306)
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("9_rw3fj")
 
 [node name="Sprite2D" type="Sprite2D" parent="sword"]
