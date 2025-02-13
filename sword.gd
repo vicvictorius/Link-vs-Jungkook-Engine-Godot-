@@ -10,6 +10,11 @@ var max_rotation = deg_to_rad(130)
 @onready var sprite = $Sprite2D  
 @onready var collision = $CollisionShape2D  
 
+signal hit_something(body: Node)  # Sinal personalizado
+
+func _ready():
+	add_to_group("sword")  # Adiciona a espada ao grupo "sword"
+
 func _physics_process(delta):
 	global_position = link.global_position  
 
@@ -39,11 +44,14 @@ func _physics_process(delta):
 		sprite.visible = false  
 		collision.disabled = true  
 
-func _input(event):
+func _input(event): 
 	# Se o botão direito do mouse estiver pressionado, o ataque não inicia
 	if Input.is_action_pressed("mouse_right"):
 		return
 
 	if Input.is_action_just_pressed("mouse_left"):
 		rotating = true
-		total_rotation = 0.0  
+		total_rotation = 0.0
+
+func _on_area_entered(area: Area2D) -> void:
+	emit_signal("hit_something", area)  # Notifica que a espada acertou algo
