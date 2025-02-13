@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsu3bsdbwjcl1"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_ld8pt"]
+[ext_resource type="Texture2D" uid="uid://cd8uljud2ffll" path="res://sprites/jungcook/jungcook shoot.png" id="2_5yye5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_do26s"]
+
+[node name="bullet" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+mass = 1.283
+gravity_scale = 0.0
+script = ExtResource("1_ld8pt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_5yye5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_do26s")

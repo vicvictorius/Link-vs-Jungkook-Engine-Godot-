@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://bif6caisusvmg"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_f38pu"]
+[ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="2_22t1k"]
+[ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="3_211nj"]
+[ext_resource type="Texture2D" uid="uid://ejakk5kepfje" path="res://sprites/link passo 2.png" id="4_251s4"]
+[ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="5_3jeb7"]
+[ext_resource type="Script" path="res://shield.gd" id="5_f81rc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3k0x1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_22t1k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_211nj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_251s4")
+}],
+"loop": true,
+"name": &"link walking",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wfycs"]
+size = Vector2(30, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ghh8"]
+size = Vector2(10, 54)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="link" type="CharacterBody2D" parent="."]
+position = Vector2(563, 306)
+script = ExtResource("1_f38pu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="link"]
+texture_filter = 1
+scale = Vector2(1.73438, 1.73438)
+sprite_frames = SubResource("SpriteFrames_3k0x1")
+animation = &"link walking"
+frame_progress = 0.736139
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="link"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_wfycs")
+
+[node name="shield" type="CharacterBody2D" parent="link"]
+position = Vector2(-30, 1)
+script = ExtResource("5_f81rc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="link/shield"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_7ghh8")
+
+[node name="Sprite2D" type="Sprite2D" parent="link/shield"]
+texture_filter = 1
+position = Vector2(3, 9.53674e-07)
+scale = Vector2(1.35938, 1.35938)
+texture = ExtResource("5_3jeb7")
