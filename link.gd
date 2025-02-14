@@ -3,43 +3,44 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-var heart_list : Array[TextureRect]
-var health = 4 # Quantidade de vidas inicial
-
+@onready var health = $link/Health # Referência ao nó de vida
+@onready var hitbox = $link/Hitbox # Referência ao Area2D de colisão
+var hp = 150
 
 func _ready() -> void:
-	var hearts_parent = $"../../CanvasLayer/HeartsContainer"
-	for child in hearts_parent.get_children():
-		heart_list.append(child)
-	print(heart_list)
+	health.died.connect(death)  # Conecta diretamente à função death
+	hitbox.body_entered.connect(_on_hitbox_body_entered)
+
+func _on_hitbox_body_entered(body):
+	if body.name == "jungcook":
+		take_damage()
 
 func take_damage():
-	health -= 1
-	update_hearts()
-	if health <= 0:
-		die()
-
-func update_hearts():
-	for i in range(len(heart_list)):
-		heart_list[i].visible = i < health #Mostra apenas os corações correspondentes a vida
-
-func die():
-	queue_free() # remove o link do jogo e reinicia a cena
+	health.take_damage(1)  # Aplica 1 de dano
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction != 0:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = 0
+	velocity.x = direction * SPEED if direction != 0 else 0
 
+	death()
 	move_and_slide()
+
+func death():
+	if hp <= 0:
+		queue_free()
+		print("Personagem destruído!")
+
+func damage(dano):
+	hp -= dano
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.name == "link":
+		print("COLIDIDO COM O jogador")
+		damage(10)
+		print(hp)

@@ -89,6 +89,6 @@ func _on_timer_2_timeout() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "jungcook":  # Verifica se o nome do corpo é "jungcook"
-		print("COLIDIDO COM O PERSONAGEM")
+		print("COLIDIDO COM O jungcook")
 		damage(10)
 		print(hp)

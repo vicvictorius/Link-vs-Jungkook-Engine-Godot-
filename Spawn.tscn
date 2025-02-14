@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bif6caisusvmg"]
+[gd_scene load_steps=29 format=3 uid="uid://bif6caisusvmg"]
 
 [ext_resource type="Texture2D" uid="uid://bfacs8unjt1ch" path="res://sprites/hyrule field.png" id="1_3nasj"]
 [ext_resource type="Texture2D" uid="uid://dpa4c0g3rmoxe" path="res://sprites/tilesets/download.jpg" id="2_8m6nw"]
@@ -13,8 +13,10 @@
 [ext_resource type="Script" path="res://shield.gd" id="7_rpc58"]
 [ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="8_3r3b0"]
 [ext_resource type="Script" path="res://sword.gd" id="9_rw3fj"]
+[ext_resource type="Script" path="res://health.gd" id="10_efe5r"]
 [ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="10_sx5bp"]
 [ext_resource type="Script" path="res://door.gd" id="11_0vy8x"]
+[ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="17_tkppt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m2i0g"]
 texture = ExtResource("1_3nasj")
@@ -9418,7 +9420,12 @@ scale = Vector2(1.10156, 1.10156)
 sprite_frames = SubResource("SpriteFrames_3k0x1")
 animation = &"link walking"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="link"]
+[node name="Health" type="Node" parent="link"]
+script = ExtResource("10_efe5r")
+
+[node name="Hitbox" type="Area2D" parent="link"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="link/Hitbox"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_wfycs")
 
@@ -9462,5 +9469,29 @@ script = ExtResource("11_0vy8x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door"]
 position = Vector2(-1.5, 0)
 shape = SubResource("RectangleShape2D_42u7e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HeartsContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 5.0
+offset_right = 9617.0
+offset_bottom = 2400.0
+scale = Vector2(0.01, 0.01)
+
+[node name="Hearts" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("17_tkppt")
+
+[node name="Hearts2" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("17_tkppt")
+
+[node name="Hearts3" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("17_tkppt")
+
+[node name="Hearts4" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("17_tkppt")
 
 [connection signal="body_entered" from="door" to="door" method="_on_body_entered"]
