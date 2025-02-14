@@ -1,7 +1,11 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=21 format=3 uid="uid://iphhqboef7g0"]
+=======
+[gd_scene load_steps=22 format=3 uid="uid://dd74uuu3tmv14"]
+>>>>>>> Stashed changes
 
+[ext_resource type="Script" path="res://link.gd" id="1_2ech4"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="1_82y6w"]
-[ext_resource type="Script" path="res://character_body_2d.gd" id="2_epnql"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="3_ductp"]
 [ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="4_onfic"]
 [ext_resource type="Texture2D" uid="uid://ejakk5kepfje" path="res://sprites/link passo 2.png" id="5_spxsl"]
@@ -12,8 +16,14 @@
 [ext_resource type="Texture2D" uid="uid://bdntu6xqj7pwj" path="res://sprites/tilesets/Dungeon top down tileset 16X16/Asetts/Tileset.png" id="10_t5w7k"]
 [ext_resource type="Texture2D" uid="uid://dfw1g2sftuhwm" path="res://sprites/jungcook/jungkook.png" id="11_incjs"]
 [ext_resource type="Script" path="res://jungcook.gd" id="11_lqkwf"]
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://dqd3efkdghun5" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="PackedScene" uid="uid://du47g55vepg2a" path="res://army_1.tscn" id="13_k3i2b"]
+=======
+[ext_resource type="PackedScene" uid="uid://dsu3bsdbwjcl1" path="res://bullet.tscn" id="12_wg03p"]
+[ext_resource type="Script" path="res://hearts_container.gd" id="14_ihdsr"]
+[ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="14_syxfn"]
+>>>>>>> Stashed changes
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7w75e"]
 animations = [{
@@ -38,6 +48,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6fv7"]
+size = Vector2(22, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sx8xg"]
 size = Vector2(10, 38)
@@ -145,9 +156,15 @@ sources/0 = SubResource("TileSetAtlasSource_ldoe0")
 show_behind_parent = true
 top_level = true
 position = Vector2(563, 306)
+<<<<<<< Updated upstream
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("2_epnql")
+=======
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_2ech4")
+>>>>>>> Stashed changes
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="character/link"]
 texture_filter = 1
@@ -157,7 +174,7 @@ sprite_frames = SubResource("SpriteFrames_7w75e")
 animation = &"link walking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="character/link"]
-position = Vector2(0, 1)
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_n6fv7")
 
 [node name="shield" type="CharacterBody2D" parent="character"]
@@ -227,8 +244,35 @@ texture = ExtResource("11_incjs")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="jungcook"]
 polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
 
+<<<<<<< Updated upstream
 [node name="Timer2" type="Timer" parent="jungcook"]
 wait_time = 4.0
+=======
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HeartsContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 10.0
+offset_right = 9622.0
+offset_bottom = 2400.0
+scale = Vector2(0.01, 0.01)
+script = ExtResource("14_ihdsr")
+
+[node name="hearts" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("14_syxfn")
+
+[node name="hearts2" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("14_syxfn")
+
+[node name="hearts3" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("14_syxfn")
+
+[node name="hearts4" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("14_syxfn")
+>>>>>>> Stashed changes
 
 [connection signal="body_entered" from="character/sword/Area2D" to="jungcook" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="jungcook/Timer" to="jungcook" method="_on_timer_timeout"]
