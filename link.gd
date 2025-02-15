@@ -4,23 +4,27 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var heart_list : Array[TextureRect]
-var health = 5
+var health = 4 # Quantidade de vidas inicial
+
 
 func _ready() -> void:
-	var hearts_parent = $"../Health_Bar/HBoxContainer"
+	var hearts_parent = $"../../CanvasLayer/HeartsContainer"
 	for child in hearts_parent.get_children():
 		heart_list.append(child)
 	print(heart_list)
 
 func take_damage():
-	if health > 0:
-		health -= 1
-		$"../Damage".play("damaged")
-		update_heart_display()
+	health -= 1
+	update_hearts()
+	if health <= 0:
+		die()
 
-func update_heart_display():
-	for i in range(heart_list.size()):
-		heart_list[i].visible = i < health
+func update_hearts():
+	for i in range(len(heart_list)):
+		heart_list[i].visible = i < health #Mostra apenas os corações correspondentes a vida
+
+func die():
+	queue_free() # remove o link do jogo e reinicia a cena
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

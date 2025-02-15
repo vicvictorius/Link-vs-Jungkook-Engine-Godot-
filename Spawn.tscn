@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bif6caisusvmg"]
+[gd_scene load_steps=28 format=3 uid="uid://cwixfpxhmsyhr"]
 
 [ext_resource type="Texture2D" uid="uid://bfacs8unjt1ch" path="res://sprites/hyrule field.png" id="1_3nasj"]
 [ext_resource type="Texture2D" uid="uid://dpa4c0g3rmoxe" path="res://sprites/tilesets/download.jpg" id="2_8m6nw"]
@@ -9390,6 +9390,9 @@ size = Vector2(10, 38)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xpr0"]
 size = Vector2(40, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lo5i6"]
+size = Vector2(40, 10)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42u7e"]
 size = Vector2(63, 20)
 
@@ -9450,6 +9453,12 @@ texture = ExtResource("10_sx5bp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
 position = Vector2(45, 0)
 shape = SubResource("RectangleShape2D_6xpr0")
+
+[node name="Area2D" type="Area2D" parent="sword"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sword/Area2D"]
+position = Vector2(45, 0)
+shape = SubResource("RectangleShape2D_lo5i6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(566, 277)
