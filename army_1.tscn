@@ -39,6 +39,7 @@ offset_bottom = -3.0
 
 [node name="HealthBar" type="ProgressBar" parent="Control"]
 modulate = Color(0.793203, 0, 0.0682505, 1)
+layout_mode = 0
 offset_right = 60.0
 offset_bottom = 11.0
 theme = SubResource("Theme_ju846")
