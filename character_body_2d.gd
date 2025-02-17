@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 300.0  # Velocidade de movimento
-var hp = 20
+var hp = 30
 
 @onready var animated_sprite = $AnimatedSprite2D 
 
@@ -56,11 +56,10 @@ func look_at_mouse():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	print("Colisão detectada com:", body.name)  # Debug para verificar colisões
-	
-	if body.is_in_group("inimigos"):  # Confirma que colidiu com um inimigo
-		print("Colidiu com um inimigo e recebeu dano!")
+	if body.name == "link":  # Verifica se o nome do corpo é "jungcook"
+		print("COLIDIDO COM O jogador")
 		damage(10)
-		print("HP atual:", hp)
+		print(hp)
 
 func damage(dano):
 	hp -= dano

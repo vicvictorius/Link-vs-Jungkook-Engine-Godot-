@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bdntu6xqj7pwj" path="res://sprites/tilesets/Dungeon top down tileset 16X16/Asetts/Tileset.png" id="10_t5w7k"]
 [ext_resource type="Texture2D" uid="uid://dfw1g2sftuhwm" path="res://sprites/jungcook/jungkook.png" id="11_incjs"]
 [ext_resource type="Script" path="res://jungcook.gd" id="11_lqkwf"]
-[ext_resource type="PackedScene" path="res://bullet.tscn" id="12_wg03p"]
+[ext_resource type="PackedScene" uid="uid://dqd3efkdghun5" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="PackedScene" uid="uid://du47g55vepg2a" path="res://army_1.tscn" id="13_k3i2b"]
 [ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="16_s8o7r"]
 
@@ -40,11 +40,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_utdek"]
+size = Vector2(37, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3otg"]
+size = Vector2(21, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sx8xg"]
-size = Vector2(10, 38)
+size = Vector2(9, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dkie"]
 size = Vector2(40, 10)
@@ -145,7 +147,7 @@ sources/0 = SubResource("TileSetAtlasSource_ldoe0")
 
 [node name="character" type="Node" parent="."]
 
-[node name="link" type="CharacterBody2D" parent="character" groups=["player"]]
+[node name="link" type="CharacterBody2D" parent="character" groups=["inimigos"]]
 position = Vector2(563, 306)
 collision_mask = 2
 script = ExtResource("2_epnql")
@@ -187,10 +189,11 @@ animation = &"link walking"
 [node name="Hitbox" type="Area2D" parent="character/link"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="character/link/Hitbox"]
-position = Vector2(0, 1)
+position = Vector2(2.5, 0.5)
 shape = SubResource("RectangleShape2D_utdek")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="character/link"]
+position = Vector2(-1.5, 3.5)
 shape = SubResource("RectangleShape2D_g3otg")
 
 [node name="shield" type="CharacterBody2D" parent="character"]
@@ -200,7 +203,7 @@ collision_mask = 7
 script = ExtResource("6_ok7t2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="character/shield"]
-position = Vector2(-22, 1)
+position = Vector2(-22.5, 1)
 shape = SubResource("RectangleShape2D_sx8xg")
 
 [node name="Sprite2D" type="Sprite2D" parent="character/shield"]
@@ -251,7 +254,7 @@ texture = ExtResource("11_incjs")
 [node name="Timer" type="Timer" parent="jungcook"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="jungcook"]
-polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
+polygon = PackedVector2Array(-60, -53, -18, -79, 32, -89, 66, -55, 66, -29, 59, -11, 47, 14, 51, 54, 4, 81, -44, 35, -31, 11, -50, -12)
 
 [node name="Timer2" type="Timer" parent="jungcook"]
 wait_time = 4.0
@@ -260,7 +263,7 @@ wait_time = 4.0
 position = Vector2(-1, 1)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="jungcook/Area2D"]
-polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
+polygon = PackedVector2Array(-60, -52, -19, -80, 33, -90, 65, -57, 66, -22, 65, -56, 61, 16, 51, 55, 4, 80, -39, 33, -43, -8, -54, -24)
 
 [node name="tiles" type="Node" parent="."]
 
