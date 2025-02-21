@@ -13,7 +13,7 @@ var player: Node2D = null
 @onready var army_timer = $Timer2
 @onready var health_bar: ProgressBar = $"../character/Camera2D/Control/jungcookheathbar"  # Ajuste o caminho conforme necessário
 var explosion_scene = preload("res://bigexplosion.tscn")  # Ajuste o caminho para a sua cena de explosão
-
+@onready var sprite: Sprite2D = $Sprite2D  # Ajuste o caminho para o Sprite2D
 
 const KNOCKBACK_FORCE = 1000.0  # Força do knockback
 const KNOCKBACK_DECAY = 0.1  # Redução gradual da velocidade do knockback
@@ -27,7 +27,7 @@ func _ready():
 		$Timer2.start()
 	else:
 		print("Jogador não encontrado!")  # Debug
-	
+
 	update_health_bar()  # Atualiza a barra de vida no início
 
 func _physics_process(delta):
@@ -77,6 +77,7 @@ func shoot_at_player():
 		bullet.direction = (player.global_position - global_position).normalized()  # Define a direção do projétil
 		bullet.global_position = global_position  # Define a posição inicial do projétil
 		get_parent().add_child(bullet)  # Adiciona o projétil à cena
+		bullet.name = "Bullet"
 	else:
 		print("Erro: Cena do projétil não carregada!")  # Debug
 
@@ -101,6 +102,7 @@ func gang_de_army():
 
 func damage(dano):
 	hp -= dano
+	flash_red()
 	update_health_bar()
 
 func update_health_bar():
@@ -120,3 +122,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		# Aplica o knockback
 		var direction = (global_position - body.global_position).normalized()
 		knockback_velocity = direction * KNOCKBACK_FORCE
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
+
+func flash_red():
+	sprite.modulate = Color(1, 0.3, 0.3)  # Fica avermelhado
+	await get_tree().create_timer(0.2).timeout  # Espera 0.2 segundos
+	sprite.modulate = Color(1, 1, 1)  # Volta ao normal
