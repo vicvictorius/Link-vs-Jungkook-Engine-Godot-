@@ -1,14 +1,11 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=4 format=3 uid="uid://dqd3efkdghun5"]
-=======
-[gd_scene load_steps=5 format=3 uid="uid://dsu3bsdbwjcl1"]
->>>>>>> Stashed changes
+[gd_scene load_steps=5 format=3 uid="uid://crv57hvmknxib"]
 
 [ext_resource type="Script" path="res://bullet.gd" id="1_ld8pt"]
 [ext_resource type="Texture2D" uid="uid://cd8uljud2ffll" path="res://sprites/jungcook/jungcook shoot.png" id="2_5yye5"]
-[ext_resource type="Script" path="res://area_2d.gd" id="3_4ayql"]
+[ext_resource type="Script" path="res://hitbox bullet.gd" id="3_mkh64"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_do26s"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t8h8j"]
+radius = 9.0
 
 [node name="bullet" type="RigidBody2D"]
 collision_layer = 4
@@ -22,7 +19,18 @@ texture_filter = 1
 texture = ExtResource("2_5yye5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_do26s")
+rotation = -0.127409
+shape = SubResource("CapsuleShape2D_t8h8j")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("3_4ayql")
+script = ExtResource("3_mkh64")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = -0.127409
+scale = Vector2(1.1, 1.1)
+shape = SubResource("CapsuleShape2D_t8h8j")
+
+[connection signal="timeout" from="LifetimeTimer" to="." method="_on_lifetime_timer_timeout"]

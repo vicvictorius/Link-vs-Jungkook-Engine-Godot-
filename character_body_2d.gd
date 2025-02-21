@@ -5,6 +5,9 @@ var hp = 30
 
 @onready var animated_sprite = $AnimatedSprite2D 
 
+func _ready():
+	connect("body_entered", Callable(self, "_on_body_entered"))
+
 func _physics_process(delta: float) -> void:
 	# Inicializa o vetor de movimento
 	velocity = Vector2.ZERO
@@ -53,14 +56,36 @@ func look_at_mouse():
 	# Aplica a rotação ao personagem com um offset de 90 graus
 	rotation = angle + deg_to_rad(-90)
 
+func damage(dano):
+	hp -= dano
+	print("Dano recebido:", dano, " | HP restante:", hp)  # Debug
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+	# Pisca vermelho ao tomar dano
+	flash_red()
+
+func flash_red():
+	animated_sprite.modulate = Color(1, 0.3, 0.3)  # Fica avermelhado
+	await get_tree().create_timer(0.2).timeout  # Espera 0.2 segundos
+	animated_sprite.modulate = Color(1, 1, 1)  # Volta ao normal
+
+func _on_hitboc_body_entered(body: Node2D) -> void:
 	print("Colisão detectada com:", body.name)  # Debug para verificar colisões
 	if body.name == "link":  # Verifica se o nome do corpo é "jungcook"
 		print("COLIDIDO COM O jogador")
 		damage(10)
 		print(hp)
 
-func damage(dano):
-	hp -= dano
-	print("Dano recebido:", dano, " | HP restante:", hp)  # Debug
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	print("Colisão detectada com:", body.name)  # Debug para verificar colisões
+	if body.is_in_group("pimbadores"):
+		print("pimbado")
+		damage(10)
+		print(hp)
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	print("Colisão detectada com:", area.name)  # Debug para verificar colisões
+	if area.is_in_group("pimbadores"):
+		print("pimbado")
+		damage(10)
+		print(hp)

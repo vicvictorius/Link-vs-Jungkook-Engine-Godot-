@@ -1,41 +1,94 @@
 extends CharacterBody2D
 
 const SPEED = 150.0  # Velocidade do inimigo
+const KNOCKBACK_FORCE = 300.0  # Força do knockback
+const KNOCKBACK_DECAY = 0.9  # Redução gradual da velocidade do knockback
+
 var player: Node2D = null
-var hp = 20
 var sword: Node2D = null
+var hp = 60
+var knockback_velocity: Vector2 = Vector2.ZERO  # Velocidade do knockback
+
+@onready var health_bar: ProgressBar = $Control/HealthBar  # Referência à ProgressBar
+@onready var sprite = $Sprite2D
+# Carrega a cena da explosão
+var explosion_scene = preload("res://explosion.tscn")  # Ajuste o caminho para a sua cena de explosão
 
 func _ready():
-	player = get_node_or_null("../character/link")  # Ajuste o caminho conforme necessário
-	sword = get_node_or_null(".../character/sword")
+	# Obtém referências ao jogador e à espada
+	player = get_node("/root/Node2D/character/link")  # Ajuste o caminho conforme necessário
+	sword = get_node("/root/Node2D/character/sword")  # Ajuste o caminho conforme necessário
+	add_to_group("pimbadores")  # Adiciona este nó ao grupo "inimigos"
+
+
 	if player:
 		print("Jogador encontrado!")  # Debug
 	else:
 		print("Jogador não encontrado!")  # Debug
 
+	add_to_group("enemies")  # Adiciona o inimigo a um grupo (opcional, para gerenciamento)
+
+	update_health_bar()  # Atualiza a barra de vida no início
+
 func _physics_process(delta):
 	if player:
-		# Calcular a direção para o jogador
-		var direction = (player.global_position - global_position).normalized()
-		# Calcular a distância entre o inimigo e o jogador
-		var distance = global_position.distance_to(player.global_position)
+		# Aplica o knockback, se houver
+		if knockback_velocity != Vector2.ZERO:
+			velocity = knockback_velocity
+			move_and_slide()
 
-		# Definir a velocidade na direção do jogador
-		velocity = direction * SPEED  # Multiplica a direção pela velocidade para mover o inimigo
-		move_and_slide()  # Move o inimigo utilizando a física
+			# Reduz gradualmente a velocidade do knockback
+			knockback_velocity *= KNOCKBACK_DECAY
 
-	# Verificar se a vida do inimigo é menor ou igual a 0
+			# Reseta o knockback quando ele for muito pequeno
+			if knockback_velocity.length() < 10:
+				knockback_velocity = Vector2.ZERO
+		else:
+			# Movimentação normal em direção ao jogador
+			var direction = (player.global_position - global_position).normalized()
+			var distance = global_position.distance_to(player.global_position)
+
+			# Move o inimigo apenas se estiver longe o suficiente do jogador
+			if distance > 10:  # Distância mínima para parar de se mover
+				velocity = direction * SPEED
+				move_and_slide()
+
+	# Verifica se o inimigo morreu
 	death()
 
 func damage(dano):
 	hp -= dano
+	hp = max(hp, 0)  # Garante que a vida não fique negativa
+	update_health_bar()
+	print("Dano recebido! Vida restante: ", hp)
+	flash_red()
+	
 
 func death():
 	if hp <= 0:
+		# Instancia a explosão
+		var explosion = explosion_scene.instantiate()
+		get_parent().add_child(explosion)  # Adiciona a explosão ao mundo
+		explosion.global_position = global_position  # Posiciona a explosão no mesmo lugar do inimigo
+
 		queue_free()  # Remove o inimigo da cena
-		print("army destruído!")
+		print("Army destruído!")
 
+func update_health_bar():
+	if health_bar:
+		health_bar.value = hp
 
-func _on_hitbox_area_entered(area: Area2D):
-	if area.is_in_group("sword"):  # Verifica se a área pertence ao grupo "sword"
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.name == "sword":  # Verifique o nome correto da espada
 		damage(20)
+		print("pimba")
+		print(hp)
+
+		# Aplica o knockback
+		var direction = (global_position - body.global_position).normalized()
+		knockback_velocity = direction * KNOCKBACK_FORCE
+
+func flash_red():
+	sprite.modulate = Color(1, 0.3, 0.3)  # Fica avermelhado
+	await get_tree().create_timer(0.2).timeout  # Espera 0.2 segundos
+	sprite.modulate = Color(1, 1, 1)  # Volta ao normal
