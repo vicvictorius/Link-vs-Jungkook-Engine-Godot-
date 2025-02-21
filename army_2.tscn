@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3y5c2l86l02g"]
+
+[ext_resource type="Script" path="res://army.gd" id="1_cy8iy"]
+[ext_resource type="Texture2D" uid="uid://cr3yybd0qbqj7" path="res://sprites/jungcook/army2.png" id="2_xhrip"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_47e2n"]
+radius = 24.0052
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_52c50"]
+radius = 23.0489
+
+[sub_resource type="Theme" id="Theme_ju846"]
+
+[node name="army1" type="CharacterBody2D"]
+script = ExtResource("1_cy8iy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -4)
+scale = Vector2(0.0546296, 0.0546296)
+texture = ExtResource("2_xhrip")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("CircleShape2D_47e2n")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("CircleShape2D_52c50")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -30.0
+offset_top = -43.0
+offset_right = 10.0
+offset_bottom = -3.0
+
+[node name="HealthBar" type="ProgressBar" parent="Control"]
+modulate = Color(0.793203, 0, 0.0682505, 1)
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 11.0
+theme = SubResource("Theme_ju846")
+max_value = 60.0
+value = 60.0
+show_percentage = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

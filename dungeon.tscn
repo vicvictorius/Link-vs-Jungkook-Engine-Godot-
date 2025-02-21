@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://hx3b7j5ye77d"]
+[gd_scene load_steps=26 format=3 uid="uid://hx3b7j5ye77d"]
 
-[ext_resource type="Script" path="res://camera_2d.gd" id="1_82y6w"]
+[ext_resource type="Script" path="res://start music.gd" id="1_13hw8"]
 [ext_resource type="Script" path="res://character_body_2d.gd" id="2_epnql"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="3_ductp"]
 [ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="4_onfic"]
@@ -8,12 +8,16 @@
 [ext_resource type="Script" path="res://shield.gd" id="6_ok7t2"]
 [ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="7_8wol7"]
 [ext_resource type="Script" path="res://sword.gd" id="8_qmils"]
+[ext_resource type="Script" path="res://camera_2ddungeon.gd" id="9_4pudn"]
 [ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="9_utbc6"]
 [ext_resource type="Texture2D" uid="uid://bdntu6xqj7pwj" path="res://sprites/tilesets/Dungeon top down tileset 16X16/Asetts/Tileset.png" id="10_t5w7k"]
 [ext_resource type="Texture2D" uid="uid://dfw1g2sftuhwm" path="res://sprites/jungcook/jungkook.png" id="11_incjs"]
 [ext_resource type="Script" path="res://jungcook.gd" id="11_lqkwf"]
 [ext_resource type="PackedScene" uid="uid://crv57hvmknxib" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="PackedScene" uid="uid://b7eg10gk3t68i" path="res://army_1.tscn" id="13_k3i2b"]
+[ext_resource type="AudioStream" uid="uid://dqdpaq2jonlsc" path="res://sounds/duel of fates.mp3" id="16_ge4t2"]
+[ext_resource type="PackedScene" uid="uid://b3y5c2l86l02g" path="res://army_2.tscn" id="16_mbraf"]
+[ext_resource type="Script" path="res://konamikode.gd" id="18_avk0b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7w75e"]
 animations = [{
@@ -141,6 +145,7 @@ texture = ExtResource("10_t5w7k")
 sources/0 = SubResource("TileSetAtlasSource_ldoe0")
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_13hw8")
 
 [node name="character" type="Node" parent="."]
 
@@ -166,6 +171,12 @@ shape = SubResource("CircleShape2D_k41r8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="character/link/hitbox"]
 shape = SubResource("CircleShape2D_ya6tt")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="character/link"]
+position = Vector2(-563, -306)
+stream = ExtResource("16_ge4t2")
+autoplay = true
+parameters/looping = false
 
 [node name="shield" type="CharacterBody2D" parent="character"]
 position = Vector2(563, 307)
@@ -208,7 +219,7 @@ shape = SubResource("RectangleShape2D_2dkie")
 
 [node name="Camera2D" type="Camera2D" parent="character"]
 position = Vector2(566, 277)
-script = ExtResource("1_82y6w")
+script = ExtResource("9_4pudn")
 
 [node name="Control" type="Control" parent="character/Camera2D"]
 layout_mode = 3
@@ -243,6 +254,7 @@ position = Vector2(550, -176)
 script = ExtResource("11_lqkwf")
 bullet_scene = ExtResource("12_wg03p")
 army_scene = ExtResource("13_k3i2b")
+army2_scene = ExtResource("16_mbraf")
 
 [node name="Sprite2D" type="Sprite2D" parent="jungcook"]
 texture_filter = 1
@@ -256,7 +268,7 @@ texture = ExtResource("11_incjs")
 polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
 
 [node name="Timer2" type="Timer" parent="jungcook"]
-wait_time = 4096.0
+wait_time = 8.0
 
 [node name="hitboc" type="Area2D" parent="jungcook"]
 position = Vector2(-550, 176)
@@ -266,8 +278,21 @@ position = Vector2(550, -176)
 scale = Vector2(1.1, 1.1)
 polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
 
+[node name="timerarmy2" type="Timer" parent="jungcook"]
+wait_time = 8.0
+
+[node name="timer5min" type="Timer" parent="jungcook"]
+wait_time = 4.0
+one_shot = true
+
 [node name="army1" parent="." instance=ExtResource("13_k3i2b")]
 position = Vector2(763, -174)
+
+[node name="army2" parent="." instance=ExtResource("16_mbraf")]
+position = Vector2(300, -155)
+
+[node name="konamikode" type="Node" parent="."]
+script = ExtResource("18_avk0b")
 
 [connection signal="area_entered" from="character/link/hitbox" to="character/link" method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="character/link/hitbox" to="jungcook" method="_on_hitbox_area_entered"]
@@ -276,3 +301,5 @@ position = Vector2(763, -174)
 [connection signal="timeout" from="jungcook/Timer" to="jungcook" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer2" to="jungcook" method="_on_timer_2_timeout"]
 [connection signal="body_entered" from="jungcook/hitboc" to="character/link" method="_on_hitboc_body_entered"]
+[connection signal="timeout" from="jungcook/timerarmy2" to="jungcook" method="_on_timerarmy_2_timeout"]
+[connection signal="timeout" from="jungcook/timer5min" to="jungcook" method="_on_timer_5_min_timeout"]

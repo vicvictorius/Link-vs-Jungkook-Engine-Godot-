@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://iwhrltbmahq2"]
+
+[ext_resource type="Script" path="res://musci[.gd" id="1_43h8p"]
+[ext_resource type="Texture2D" uid="uid://bgj00geshqf1o" path="res://sprites/screen/vc é fraco.png" id="1_c6qg8"]
+[ext_resource type="Script" path="res://button.gd" id="2_817c3"]
+[ext_resource type="Texture2D" uid="uid://bapuk4t7xcqh7" path="res://sprites/screen/ganhemo.png" id="3_m8h73"]
+[ext_resource type="AudioStream" uid="uid://gt4nio242ihc" path="res://sounds/gg rapeize.mp3" id="5_mgisl"]
+
+[node name="Gg" type="Node2D"]
+script = ExtResource("1_43h8p")
+
+[node name="VcÉFraco" type="Sprite2D" parent="."]
+position = Vector2(294.556, 218.5)
+scale = Vector2(0.620833, 0.620833)
+texture = ExtResource("1_c6qg8")
+
+[node name="Button" type="Button" parent="VcÉFraco"]
+offset_left = -441.805
+offset_top = 21.8121
+offset_right = 178.195
+offset_bottom = 55.8121
+text = "JOGAR DNV"
+script = ExtResource("2_817c3")
+
+[node name="Ganhemo" type="Sprite2D" parent="."]
+position = Vector2(213.5, 191)
+texture = ExtResource("3_m8h73")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_mgisl")
+volume_db = 7.923
+autoplay = true
+parameters/looping = false
+
+[connection signal="button_down" from="VcÉFraco/Button" to="VcÉFraco/Button" method="_on_button_down"]
