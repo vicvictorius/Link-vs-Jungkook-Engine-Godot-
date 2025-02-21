@@ -5,7 +5,7 @@ var konami_code = ["up", "up", "down", "down", "left", "right", "left", "right",
 var input_buffer = []
 
 func _process(delta):
-	if Input.is_action_just_pressed("up"):
+	if Input.is_action_just_pressed("ui_up"):
 		print("cima")
 		input_buffer.append("up")
 		print(input_buffer)

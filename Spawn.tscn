@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dmu172giv5t4v" path="res://sprites/tilesets/download (3).jpg" id="3_8h0a0"]
 [ext_resource type="Script" path="res://character_body_2d.gd" id="3_43ebo"]
 [ext_resource type="Texture2D" uid="uid://desrummwi7uvp" path="res://sprites/tilesets/download__5_-removebg-preview.png" id="3_n72o7"]
-[ext_resource type="Texture2D" uid="uid://ny6qixgo77k8" path="res://sprites/tilesets/PC Computer - Stardew Valley - Cabins.png" id="4_bpvos"]
+[ext_resource type="Texture2D" uid="uid://ny6qixgo77k8" path="res://sprites/tilesets/Cabins.png" id="4_bpvos"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="4_m5bg4"]
 [ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="5_06fu8"]
 [ext_resource type="Texture2D" uid="uid://ejakk5kepfje" path="res://sprites/link passo 2.png" id="6_e2li5"]
