@@ -10,7 +10,7 @@ var hp = 60
 var knockback_velocity: Vector2 = Vector2.ZERO  # Velocidade do knockback
 
 @onready var health_bar: ProgressBar = $Control/HealthBar  # Referência à ProgressBar
-
+@onready var sprite = $Sprite2D
 # Carrega a cena da explosão
 var explosion_scene = preload("res://explosion.tscn")  # Ajuste o caminho para a sua cena de explosão
 
@@ -18,6 +18,8 @@ func _ready():
 	# Obtém referências ao jogador e à espada
 	player = get_node("/root/Node2D/character/link")  # Ajuste o caminho conforme necessário
 	sword = get_node("/root/Node2D/character/sword")  # Ajuste o caminho conforme necessário
+	add_to_group("pimbadores")  # Adiciona este nó ao grupo "inimigos"
+
 
 	if player:
 		print("Jogador encontrado!")  # Debug
@@ -59,6 +61,8 @@ func damage(dano):
 	hp = max(hp, 0)  # Garante que a vida não fique negativa
 	update_health_bar()
 	print("Dano recebido! Vida restante: ", hp)
+	flash_red()
+	
 
 func death():
 	if hp <= 0:
@@ -83,3 +87,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		# Aplica o knockback
 		var direction = (global_position - body.global_position).normalized()
 		knockback_velocity = direction * KNOCKBACK_FORCE
+
+func flash_red():
+	sprite.modulate = Color(1, 0.3, 0.3)  # Fica avermelhado
+	await get_tree().create_timer(0.2).timeout  # Espera 0.2 segundos
+	sprite.modulate = Color(1, 1, 1)  # Volta ao normal

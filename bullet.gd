@@ -10,6 +10,8 @@ func _ready():
 	linear_velocity = direction * speed
 	# Inicia o Timer (se não estiver configurado para autostart)
 	lifetime_timer.start()
+	add_to_group("pimbadores")  # Adiciona este nó ao grupo "inimigos"
+
 
 func _on_body_entered(body: Node):
 	# Lógica para quando o projétil colidir com algo
