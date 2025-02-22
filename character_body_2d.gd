@@ -67,6 +67,7 @@ func damage(dano):
 
 func update_hearts():
 	if not hearts_container:
+		print("bah")
 		return
 	var heart_value = 15  # Cada coração vale 15 HP
 	var current_hearts: int

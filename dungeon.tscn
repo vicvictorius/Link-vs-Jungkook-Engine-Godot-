@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://hx3b7j5ye77d"]
+[gd_scene load_steps=33 format=3 uid="uid://hx3b7j5ye77d"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="2_epnql"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="3_ductp"]
@@ -11,14 +11,18 @@
 [ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="9_utbc6"]
 [ext_resource type="Script" path="res://camera_2.gd" id="10_jv3s7"]
 [ext_resource type="Texture2D" uid="uid://bdntu6xqj7pwj" path="res://sprites/tilesets/Dungeon top down tileset 16X16/Asetts/Tileset.png" id="10_t5w7k"]
+[ext_resource type="Texture2D" uid="uid://blokbb2tlle36" path="res://Imagens and gifs UI UX/New Project.png" id="11_heiw1"]
 [ext_resource type="Texture2D" uid="uid://dfw1g2sftuhwm" path="res://sprites/jungcook/jungkook.png" id="11_incjs"]
 [ext_resource type="Texture2D" uid="uid://tqpyyc660ro0" path="res://Tiledungeon.jpg" id="11_jc6t6"]
 [ext_resource type="Script" path="res://jungcook.gd" id="11_lqkwf"]
 [ext_resource type="Texture2D" uid="uid://dmu172giv5t4v" path="res://sprites/tilesets/download (3).jpg" id="12_7q3u2"]
+[ext_resource type="Texture2D" uid="uid://due3jckcj3kce" path="res://Dialogo/undertale_text_box (1).png" id="12_oxs72"]
 [ext_resource type="PackedScene" uid="uid://crv57hvmknxib" path="res://bullet.tscn" id="12_wg03p"]
+[ext_resource type="Script" path="res://message_box.gd" id="13_46f8m"]
 [ext_resource type="PackedScene" uid="uid://b7eg10gk3t68i" path="res://army_1.tscn" id="13_k3i2b"]
 [ext_resource type="PackedScene" uid="uid://b3y5c2l86l02g" path="res://army_2.tscn" id="17_i7x14"]
 [ext_resource type="PackedScene" uid="uid://dc26fscilb6vm" path="res://bau/bau.tscn" id="17_x0xml"]
+[ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="23_sxxq7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7w75e"]
 animations = [{
@@ -4090,13 +4094,14 @@ sources/2 = SubResource("TileSetAtlasSource_3uxi8")
 
 [node name="character" type="Node" parent="."]
 
-[node name="link" type="CharacterBody2D" parent="character"]
+[node name="link" type="CharacterBody2D" parent="character" node_paths=PackedStringArray("hearts_container")]
 show_behind_parent = true
 top_level = true
 position = Vector2(820, 637)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("2_epnql")
+hearts_container = NodePath("../../CanvasLayer/HBoxContainer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="character/link"]
 texture_filter = 1
@@ -4163,22 +4168,42 @@ script = ExtResource("10_jv3s7")
 [node name="Control" type="Control" parent="character/Camera2D"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -566.0
-offset_top = -277.0
-offset_right = -526.0
-offset_bottom = -237.0
+offset_left = -559.0
+offset_top = -257.0
+offset_right = -519.0
+offset_bottom = -217.0
 metadata/_edit_use_anchors_ = true
 
 [node name="jungcookheathbar" type="ProgressBar" parent="character/Camera2D/Control"]
 modulate = Color(0.806922, 0, 0.0702443, 1)
 layout_mode = 0
-offset_left = 429.0
-offset_top = 117.0
-offset_right = 688.0
-offset_bottom = 144.0
+offset_left = 393.0
+offset_top = 114.0
+offset_right = 723.0
+offset_bottom = 141.0
 max_value = 500.0
 value = 500.0
 show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="character/Camera2D/Control"]
+position = Vector2(560, 124)
+scale = Vector2(0.5, 0.7)
+texture = ExtResource("11_heiw1")
+
+[node name="Dialogo" type="Control" parent="character/Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MessageBox" type="Sprite2D" parent="character/Camera2D/Dialogo"]
+position = Vector2(0, 127)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("12_oxs72")
+script = ExtResource("13_46f8m")
+
+[node name="Timer" type="Timer" parent="character/Camera2D/Dialogo/MessageBox"]
+wait_time = 4.5
 
 [node name="tiles" type="Node" parent="."]
 
@@ -4234,10 +4259,36 @@ position = Vector2(818, -179)
 
 [node name="Bau" parent="." instance=ExtResource("17_x0xml")]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 635.0
+offset_top = 507.0
+offset_right = 10247.0
+offset_bottom = 2907.0
+scale = Vector2(0.01, 0.01)
+
+[node name="hearts" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("23_sxxq7")
+
+[node name="hearts2" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("23_sxxq7")
+
+[node name="hearts3" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("23_sxxq7")
+
+[node name="hearts4" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("23_sxxq7")
+
 [connection signal="area_entered" from="character/link/hitbox" to="character/link" method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="character/link/hitbox" to="jungcook" method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="character/link/hitbox" to="character/link" method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="character/sword/Area2D" to="jungcook" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="character/Camera2D/Dialogo/MessageBox/Timer" to="character/Camera2D/Dialogo/MessageBox" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer" to="jungcook" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer2" to="jungcook" method="_on_timer_2_timeout"]
 [connection signal="body_entered" from="jungcook/hitboc" to="character/link" method="_on_hitboc_body_entered"]
