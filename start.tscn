@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bahh88st1ta5s"]
+
+[ext_resource type="Texture2D" uid="uid://cvrsq17atd2vd" path="res://sprites/screen/link vs jungcook.png" id="1_kxkhw"]
+[ext_resource type="Script" path="res://button.gd" id="2_bpvkl"]
+[ext_resource type="AudioStream" uid="uid://dt2y12hagekep" path="res://sounds/zelda main theme.mp3" id="3_hqrk1"]
+
+[node name="start" type="Node2D"]
+
+[node name="LinkVsJungcook" type="Sprite2D" parent="."]
+position = Vector2(309, 178)
+scale = Vector2(0.511111, 0.511111)
+texture = ExtResource("1_kxkhw")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 369.0
+offset_top = 275.0
+offset_right = 521.0
+offset_bottom = 309.0
+text = "JOGAR"
+script = ExtResource("2_bpvkl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(369, 275)
+stream = ExtResource("3_hqrk1")
+autoplay = true
+parameters/looping = false
+
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]

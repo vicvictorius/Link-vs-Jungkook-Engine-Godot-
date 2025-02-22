@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 var rotating = false
 var rotation_speed = 25.0  
