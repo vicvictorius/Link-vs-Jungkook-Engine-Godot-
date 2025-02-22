@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="projeto unilehu la"
-run/main_scene="res://Spawn.tscn"
+run/main_scene="res://start.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 

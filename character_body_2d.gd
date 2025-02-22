@@ -5,6 +5,7 @@ var hp = 60
 
 @onready var animated_sprite = $AnimatedSprite2D 
 @export var hearts_container: HBoxContainer  # Referência ao container dos corações
+@onready var death_scene: String = "res://game_over.tscn"
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
@@ -33,7 +34,7 @@ func _physics_process(delta: float) -> void:
 
 func death():
 	if hp <= 0:
-		queue_free()
+		get_tree().change_scene_to_file(death_scene)
 		print("personagem destruido!")
 
 	# Faz o personagem olhar para o mouse com um offset de 90 graus
