@@ -4,7 +4,7 @@ const SPEED = 300.0  # Velocidade de movimento
 var hp = 60
 
 @onready var animated_sprite = $AnimatedSprite2D 
-@export var hearts_container: HBoxContainer  # Referência ao container dos corações
+@export var hearts_container: HBoxContainer
 @onready var death_scene: String = "res://game_over.tscn"
 
 func _ready():
@@ -81,6 +81,7 @@ func update_hearts():
 	for i in range(hearts_container.get_child_count()):
 		var heart = hearts_container.get_child(i)
 		heart.visible = (i < current_hearts)
+
 
 func flash_red():
 	animated_sprite.modulate = Color(1, 0.3, 0.3)  # Fica avermelhado

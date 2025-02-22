@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://tqpyyc660ro0" path="res://Tiledungeon.jpg" id="11_jc6t6"]
 [ext_resource type="Script" path="res://jungcook.gd" id="11_lqkwf"]
 [ext_resource type="Texture2D" uid="uid://dmu172giv5t4v" path="res://sprites/tilesets/download (3).jpg" id="12_7q3u2"]
-[ext_resource type="Texture2D" uid="uid://due3jckcj3kce" path="res://Dialogo/undertale_text_box (1).png" id="12_oxs72"]
 [ext_resource type="PackedScene" uid="uid://crv57hvmknxib" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="Script" path="res://message_box.gd" id="13_46f8m"]
 [ext_resource type="PackedScene" uid="uid://b7eg10gk3t68i" path="res://army_1.tscn" id="13_k3i2b"]
@@ -56,6 +55,9 @@ size = Vector2(10, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dkie"]
 size = Vector2(40, 10)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3uxbr"]
+load_path = "res://.godot/imported/undertale_text_box (1).png-d0166dbfcd252160d161ac7337dd542d.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldoe0"]
 texture = ExtResource("10_t5w7k")
@@ -4101,7 +4103,7 @@ position = Vector2(820, 637)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("2_epnql")
-hearts_container = NodePath("../../CanvasLayer/HBoxContainer")
+hearts_container = NodePath("../../CanvasLayer/HeartsContainer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="character/link"]
 texture_filter = 1
@@ -4199,7 +4201,7 @@ offset_bottom = 40.0
 [node name="MessageBox" type="Sprite2D" parent="character/Camera2D/Dialogo"]
 position = Vector2(0, 127)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("12_oxs72")
+texture = SubResource("CompressedTexture2D_3uxbr")
 script = ExtResource("13_46f8m")
 
 [node name="Timer" type="Timer" parent="character/Camera2D/Dialogo/MessageBox"]
@@ -4261,26 +4263,25 @@ position = Vector2(818, -179)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-offset_left = 635.0
-offset_top = 507.0
-offset_right = 10247.0
-offset_bottom = 2907.0
+[node name="HeartsContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 10.0
+offset_right = 9622.0
+offset_bottom = 2400.0
 scale = Vector2(0.01, 0.01)
 
-[node name="hearts" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+[node name="hearts" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
 layout_mode = 2
 texture = ExtResource("23_sxxq7")
 
-[node name="hearts2" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+[node name="hearts2" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
 layout_mode = 2
 texture = ExtResource("23_sxxq7")
 
-[node name="hearts3" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+[node name="hearts3" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
 layout_mode = 2
 texture = ExtResource("23_sxxq7")
 
-[node name="hearts4" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+[node name="hearts4" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
 layout_mode = 2
 texture = ExtResource("23_sxxq7")
 
