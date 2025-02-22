@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://hx3b7j5ye77d"]
+[gd_scene load_steps=26 format=3 uid="uid://hx3b7j5ye77d"]
 
-[ext_resource type="Script" path="res://start music.gd" id="1_13hw8"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="1_82y6w"]
 [ext_resource type="Script" path="res://character_body_2d.gd" id="2_epnql"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="3_ductp"]
 [ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="4_onfic"]
@@ -8,15 +8,16 @@
 [ext_resource type="Script" path="res://shield.gd" id="6_ok7t2"]
 [ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="7_8wol7"]
 [ext_resource type="Script" path="res://sword.gd" id="8_qmils"]
-[ext_resource type="Script" path="res://camera_2ddungeon.gd" id="9_4pudn"]
 [ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="9_utbc6"]
+[ext_resource type="Texture2D" uid="uid://blokbb2tlle36" path="res://Imagens and gifs UI UX/New Project.png" id="10_8m74o"]
 [ext_resource type="Texture2D" uid="uid://bdntu6xqj7pwj" path="res://sprites/tilesets/Dungeon top down tileset 16X16/Asetts/Tileset.png" id="10_t5w7k"]
 [ext_resource type="Texture2D" uid="uid://dfw1g2sftuhwm" path="res://sprites/jungcook/jungkook.png" id="11_incjs"]
+[ext_resource type="Texture2D" uid="uid://due3jckcj3kce" path="res://Dialogo/undertale_text_box (1).png" id="11_jfand"]
 [ext_resource type="Script" path="res://jungcook.gd" id="11_lqkwf"]
+[ext_resource type="Script" path="res://message_box.gd" id="12_no65r"]
 [ext_resource type="PackedScene" uid="uid://crv57hvmknxib" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="PackedScene" uid="uid://b7eg10gk3t68i" path="res://army_1.tscn" id="13_k3i2b"]
-[ext_resource type="PackedScene" uid="uid://b3y5c2l86l02g" path="res://army_2.tscn" id="16_14co2"]
-[ext_resource type="AudioStream" uid="uid://dqdpaq2jonlsc" path="res://sounds/duel of fates.mp3" id="16_ge4t2"]
+[ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="15_8b524"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7w75e"]
 animations = [{
@@ -144,17 +145,17 @@ texture = ExtResource("10_t5w7k")
 sources/0 = SubResource("TileSetAtlasSource_ldoe0")
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_13hw8")
 
 [node name="character" type="Node" parent="."]
 
-[node name="link" type="CharacterBody2D" parent="character"]
+[node name="link" type="CharacterBody2D" parent="character" node_paths=PackedStringArray("hearts_container")]
 show_behind_parent = true
 top_level = true
 position = Vector2(563, 306)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("2_epnql")
+hearts_container = NodePath("../../CanvasLayer/HeartsContainer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="character/link"]
 texture_filter = 1
@@ -170,12 +171,6 @@ shape = SubResource("CircleShape2D_k41r8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="character/link/hitbox"]
 shape = SubResource("CircleShape2D_ya6tt")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="character/link"]
-position = Vector2(-563, -306)
-stream = ExtResource("16_ge4t2")
-autoplay = true
-parameters/looping = false
 
 [node name="shield" type="CharacterBody2D" parent="character"]
 position = Vector2(563, 307)
@@ -218,7 +213,7 @@ shape = SubResource("RectangleShape2D_2dkie")
 
 [node name="Camera2D" type="Camera2D" parent="character"]
 position = Vector2(566, 277)
-script = ExtResource("9_4pudn")
+script = ExtResource("1_82y6w")
 
 [node name="Control" type="Control" parent="character/Camera2D"]
 layout_mode = 3
@@ -233,12 +228,35 @@ metadata/_edit_use_anchors_ = true
 modulate = Color(0.806922, 0, 0.0702443, 1)
 layout_mode = 0
 offset_left = 429.0
-offset_top = 117.0
+offset_top = 130.0
 offset_right = 688.0
-offset_bottom = 144.0
+offset_bottom = 157.0
 max_value = 500.0
 value = 500.0
 show_percentage = false
+
+[node name="NewProject" type="Sprite2D" parent="character/Camera2D/Control"]
+position = Vector2(559.5, 141)
+scale = Vector2(0.393293, 0.659639)
+texture = ExtResource("10_8m74o")
+
+[node name="Dialogo" type="Control" parent="character/Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -6.0
+offset_top = -34.0
+offset_right = 34.0
+offset_bottom = 6.0
+
+[node name="MessageBox" type="Sprite2D" parent="character/Camera2D/Dialogo"]
+position = Vector2(-1, 139)
+scale = Vector2(0.403114, 0.375)
+texture = ExtResource("11_jfand")
+script = ExtResource("12_no65r")
+
+[node name="Timer" type="Timer" parent="character/Camera2D/Dialogo/MessageBox"]
+wait_time = 5.0
+one_shot = true
 
 [node name="tiles" type="Node" parent="."]
 
@@ -253,7 +271,6 @@ position = Vector2(550, -176)
 script = ExtResource("11_lqkwf")
 bullet_scene = ExtResource("12_wg03p")
 army_scene = ExtResource("13_k3i2b")
-army_scene2 = ExtResource("16_14co2")
 
 [node name="Sprite2D" type="Sprite2D" parent="jungcook"]
 texture_filter = 1
@@ -267,7 +284,6 @@ texture = ExtResource("11_incjs")
 polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
 
 [node name="Timer2" type="Timer" parent="jungcook"]
-wait_time = 8.0
 
 [node name="hitboc" type="Area2D" parent="jungcook"]
 position = Vector2(-550, 176)
@@ -277,23 +293,44 @@ position = Vector2(550, -176)
 scale = Vector2(1.1, 1.1)
 polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
 
-[node name="meiotermo" type="Timer" parent="jungcook"]
-wait_time = 4.0
-one_shot = true
-autostart = true
+[node name="DialogInteractionArea" type="Area2D" parent="jungcook"]
+collision_layer = 2
+collision_mask = 0
 
-[node name="timerarmy2" type="Timer" parent="jungcook"]
-wait_time = 8.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jungcook/DialogInteractionArea"]
 
 [node name="army1" parent="." instance=ExtResource("13_k3i2b")]
 position = Vector2(763, -174)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HeartsContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 5.0
+offset_right = 9617.0
+offset_bottom = 2400.0
+scale = Vector2(0.01, 0.01)
+
+[node name="hearts" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("15_8b524")
+
+[node name="hearts2" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("15_8b524")
+
+[node name="hearts3" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("15_8b524")
+
+[node name="hearts4" type="TextureRect" parent="CanvasLayer/HeartsContainer"]
+layout_mode = 2
+texture = ExtResource("15_8b524")
 
 [connection signal="area_entered" from="character/link/hitbox" to="character/link" method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="character/link/hitbox" to="jungcook" method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="character/link/hitbox" to="character/link" method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="character/sword/Area2D" to="jungcook" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="character/Camera2D/Dialogo/MessageBox/Timer" to="character/Camera2D/Dialogo/MessageBox" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer" to="jungcook" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer2" to="jungcook" method="_on_timer_2_timeout"]
 [connection signal="body_entered" from="jungcook/hitboc" to="character/link" method="_on_hitboc_body_entered"]
-[connection signal="timeout" from="jungcook/meiotermo" to="jungcook" method="_on_meiotermo_timeout"]
-[connection signal="timeout" from="jungcook/timerarmy2" to="jungcook" method="_on_timerarmy_2_timeout"]
