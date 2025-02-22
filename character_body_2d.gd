@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 func death():
 	if hp <= 0:
-		get_tree().change_scene_to_file("res://game_over.tscn")  # Troca a cena para a cena destino
+		queue_free()
 		print("personagem destruido!")
 
 	# Faz o personagem olhar para o mouse com um offset de 90 graus

@@ -284,6 +284,7 @@ texture = ExtResource("11_incjs")
 polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
 
 [node name="Timer2" type="Timer" parent="jungcook"]
+wait_time = 4096.0
 
 [node name="hitboc" type="Area2D" parent="jungcook"]
 position = Vector2(-550, 176)
