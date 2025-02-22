@@ -165,4 +165,8 @@ func _on_timerarmy_2_timeout() -> void:
 
 func _on_timer_5_min_timeout() -> void:
 	print("coisou")
-	$timerarmy2.start()
+	$timerarmy_2.start()
+
+
+func _on_timearmy_2_timeout() -> void:
+	pass # Replace with function body.

@@ -1,6 +1,5 @@
-[gd_scene load_steps=27 format=3 uid="uid://hx3b7j5ye77d"]
+[gd_scene load_steps=28 format=3 uid="uid://hx3b7j5ye77d"]
 
-[ext_resource type="Script" path="res://camera_2d.gd" id="1_82y6w"]
 [ext_resource type="Script" path="res://character_body_2d.gd" id="2_epnql"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="3_ductp"]
 [ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="4_onfic"]
@@ -8,6 +7,7 @@
 [ext_resource type="Script" path="res://shield.gd" id="6_ok7t2"]
 [ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="7_8wol7"]
 [ext_resource type="Script" path="res://sword.gd" id="8_qmils"]
+[ext_resource type="Script" path="res://camera_2.gd" id="9_pd0er"]
 [ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="9_utbc6"]
 [ext_resource type="Texture2D" uid="uid://bdntu6xqj7pwj" path="res://sprites/tilesets/Dungeon top down tileset 16X16/Asetts/Tileset.png" id="10_t5w7k"]
 [ext_resource type="Texture2D" uid="uid://dfw1g2sftuhwm" path="res://sprites/jungcook/jungkook.png" id="11_incjs"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dmu172giv5t4v" path="res://sprites/tilesets/download (3).jpg" id="12_7q3u2"]
 [ext_resource type="PackedScene" uid="uid://crv57hvmknxib" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="PackedScene" uid="uid://b7eg10gk3t68i" path="res://army_1.tscn" id="13_k3i2b"]
+[ext_resource type="PackedScene" uid="uid://b3y5c2l86l02g" path="res://army_2.tscn" id="16_y1npt"]
 [ext_resource type="PackedScene" uid="uid://dc26fscilb6vm" path="res://bau/bau.tscn" id="17_x0xml"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7w75e"]
@@ -4152,7 +4153,7 @@ shape = SubResource("RectangleShape2D_2dkie")
 
 [node name="Camera2D" type="Camera2D" parent="character"]
 position = Vector2(566, 277)
-script = ExtResource("1_82y6w")
+script = ExtResource("9_pd0er")
 
 [node name="Control" type="Control" parent="character/Camera2D"]
 layout_mode = 3
@@ -4191,6 +4192,7 @@ position = Vector2(550, -176)
 script = ExtResource("11_lqkwf")
 bullet_scene = ExtResource("12_wg03p")
 army_scene = ExtResource("13_k3i2b")
+army2_scene = ExtResource("16_y1npt")
 
 [node name="Sprite2D" type="Sprite2D" parent="jungcook"]
 texture_filter = 1
@@ -4204,7 +4206,14 @@ texture = ExtResource("11_incjs")
 polygon = PackedVector2Array(-39, -51, -7, -73, 30, -67, 46, -44, 48, -24, 49, -8, 47, 14, 33, 33, 4, 44, -22, 32, -31, 11, -41, -27)
 
 [node name="Timer2" type="Timer" parent="jungcook"]
-wait_time = 4096.0
+wait_time = 8.0
+
+[node name="timer5min" type="Timer" parent="jungcook"]
+wait_time = 4.0
+one_shot = true
+
+[node name="timerarmy_2" type="Timer" parent="jungcook"]
+wait_time = 8.0
 
 [node name="hitboc" type="Area2D" parent="jungcook"]
 position = Vector2(-550, 176)
@@ -4225,4 +4234,6 @@ position = Vector2(763, -174)
 [connection signal="body_entered" from="character/sword/Area2D" to="jungcook" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="jungcook/Timer" to="jungcook" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer2" to="jungcook" method="_on_timer_2_timeout"]
+[connection signal="timeout" from="jungcook/timer5min" to="jungcook" method="_on_timer_5_min_timeout"]
+[connection signal="timeout" from="jungcook/timerarmy_2" to="jungcook" method="_on_timerarmy_2_timeout"]
 [connection signal="body_entered" from="jungcook/hitboc" to="character/link" method="_on_hitboc_body_entered"]
