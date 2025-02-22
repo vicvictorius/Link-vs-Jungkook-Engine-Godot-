@@ -1,7 +1,7 @@
 extends Camera2D
 
 @onready var link = $"../link"  # Referência ao objeto "link"
-@export var follow_speed: float = 7  # Ajuste a velocidade de suavização
+@export var follow_speed: float = 10  # Ajuste a velocidade de suavização
 @export var min_y: float = 200  # Limite mínimo de X
 @export var max_y: float = 1000  # Limite máximo de X
 
