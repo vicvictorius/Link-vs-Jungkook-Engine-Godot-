@@ -13,11 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://dfw1g2sftuhwm" path="res://sprites/jungcook/jungkook.png" id="11_incjs"]
 [ext_resource type="Texture2D" uid="uid://tqpyyc660ro0" path="res://Tiledungeon.jpg" id="11_jc6t6"]
 [ext_resource type="Script" path="res://jungcook.gd" id="11_lqkwf"]
-[ext_resource type="Script" path="res://message_box.gd" id="12_no65r"]
+[ext_resource type="Texture2D" uid="uid://dmu172giv5t4v" path="res://sprites/tilesets/download (3).jpg" id="12_7q3u2"]
 [ext_resource type="PackedScene" uid="uid://crv57hvmknxib" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="PackedScene" uid="uid://b7eg10gk3t68i" path="res://army_1.tscn" id="13_k3i2b"]
 [ext_resource type="PackedScene" uid="uid://dc26fscilb6vm" path="res://bau/bau.tscn" id="17_x0xml"]
-[ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="15_8b524"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7w75e"]
 animations = [{
@@ -100,9 +99,12 @@ texture = ExtResource("10_t5w7k")
 9:2/0 = 0
 10:2/0 = 0
 11:2/0 = 0
+11:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:2/0 = 0
 13:2/0 = 0
+13:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:2/0 = 0
+14:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:2/0 = 0
 16:2/0 = 0
 0:3/0 = 0
@@ -119,7 +121,9 @@ texture = ExtResource("10_t5w7k")
 11:3/0 = 0
 12:3/0 = 0
 13:3/0 = 0
+13:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:3/0 = 0
+14:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:3/0 = 0
 16:3/0 = 0
 0:4/0 = 0
@@ -4074,20 +4078,23 @@ texture = ExtResource("12_7q3u2")
 45:76/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_p1pf4"]
+physics_layer_0/collision_layer = 15
+physics_layer_0/collision_mask = 15
 sources/0 = SubResource("TileSetAtlasSource_ldoe0")
+sources/1 = SubResource("TileSetAtlasSource_cdu81")
+sources/2 = SubResource("TileSetAtlasSource_3uxi8")
 
 [node name="Node2D" type="Node2D"]
 
 [node name="character" type="Node" parent="."]
 
-[node name="link" type="CharacterBody2D" parent="character" node_paths=PackedStringArray("hearts_container")]
+[node name="link" type="CharacterBody2D" parent="character"]
 show_behind_parent = true
 top_level = true
 position = Vector2(563, 306)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("2_epnql")
-hearts_container = NodePath("../../CanvasLayer/HeartsContainer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="character/link"]
 texture_filter = 1
@@ -4160,9 +4167,9 @@ metadata/_edit_use_anchors_ = true
 modulate = Color(0.806922, 0, 0.0702443, 1)
 layout_mode = 0
 offset_left = 429.0
-offset_top = 130.0
+offset_top = 117.0
 offset_right = 688.0
-offset_bottom = 157.0
+offset_bottom = 144.0
 max_value = 500.0
 value = 500.0
 show_percentage = false
