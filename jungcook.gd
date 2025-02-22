@@ -10,8 +10,13 @@ var player: Node2D = null
 @export var retreat_distance: float = 200
 @export var bullet_scene: PackedScene  # Cena do projétil
 @export var army_scene: PackedScene  # Cena do exército (defina essa variável na interface do Godot)
+@export var army_scene2: PackedScene  # Cena do exército (defina essa variável na interface do Godot)
 @onready var shoot_timer = $Timer  # Timer para controlar os tiros
 @onready var army_timer = $Timer2
+@onready var army_timer2 = $timerarmy2
+@onready var meiotermo = $meiotermo
+
+
 @onready var health_bar: ProgressBar = $"../character/Camera2D/Control/jungcookheathbar"  # Ajuste o caminho conforme necessário
 var explosion_scene = preload("res://bigexplosion.tscn")  # Ajuste o caminho para a sua cena de explosão
 @onready var sprite: Sprite2D = $Sprite2D  # Ajuste o caminho para o Sprite2D
@@ -26,6 +31,7 @@ func _ready():
 		print("Jogador encontrado!")  # Debug
 		$Timer.start()  # Inicia o Timer
 		$Timer2.start()
+		$meiotermo.start()
 	else:
 		print("Jogador não encontrado!")  # Debug
 
@@ -133,3 +139,30 @@ func flash_red():
 	sprite.modulate = Color(1, 0.3, 0.3)  # Fica avermelhado
 	await get_tree().create_timer(0.2).timeout  # Espera 0.2 segundos
 	sprite.modulate = Color(1, 1, 1)  # Volta ao normal
+	
+	
+func gang_de_army2():
+	if army_scene:
+		# Gerar uma posição aleatória dentro de um círculo ao redor do personagem
+		var radius = 400.0  # Raio máximo ao redor do personagem
+		var angle = randf_range(0, 2 * PI)  # Gerar um ângulo aleatório entre 0 e 2π
+		var distance = randf_range(0, radius)  # Gerar uma distância aleatória dentro do raio
+
+		# Calcular a posição baseada no ângulo e na distância
+		var offset = Vector2(cos(angle), sin(angle)) * distance
+		
+		# Instanciar o exército e definir sua posição
+		var army2 = army_scene2.instantiate()  # Instancia o exército
+		army2.global_position = global_position + offset  # Define a posição ao redor do personagem
+		
+		# Adicionar o exército à cena
+		get_parent().add_child(army2)  # Adiciona o exército à cena
+	else:
+		print("Erro: Cena do exército não carregada!")  # Debug
+
+func _on_meiotermo_timeout() -> void:
+	army_timer2.start()
+
+
+func _on_timerarmy_2_timeout() -> void:
+	gang_de_army2()
