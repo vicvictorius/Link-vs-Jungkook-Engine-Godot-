@@ -1,6 +1,6 @@
 extends Sprite2D  # Ou TextureRect
 
-@onready var timer = $Timer  # Referência ao Timer
+@onready var timer = $"../Timer"  # Referência ao Timer
 
 func _ready():
 	visible = true  # Mostra a imagem

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var hp = 500
+var hp = 1000
 
 var player: Node2D = null
 

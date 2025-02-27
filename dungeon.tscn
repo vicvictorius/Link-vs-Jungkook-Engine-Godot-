@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://hx3b7j5ye77d"]
+[gd_scene load_steps=32 format=3 uid="uid://hx3b7j5ye77d"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="2_epnql"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="3_ductp"]
@@ -16,11 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://tqpyyc660ro0" path="res://Tiledungeon.jpg" id="11_jc6t6"]
 [ext_resource type="Script" path="res://jungcook.gd" id="11_lqkwf"]
 [ext_resource type="Texture2D" uid="uid://dmu172giv5t4v" path="res://sprites/tilesets/download (3).jpg" id="12_7q3u2"]
+[ext_resource type="Texture2D" uid="uid://bvrjhh8yy2th7" path="res://undertale_text_box (1).png" id="12_ati5c"]
 [ext_resource type="PackedScene" uid="uid://crv57hvmknxib" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="Script" path="res://message_box.gd" id="13_46f8m"]
 [ext_resource type="PackedScene" uid="uid://b7eg10gk3t68i" path="res://army_1.tscn" id="13_k3i2b"]
 [ext_resource type="PackedScene" uid="uid://b3y5c2l86l02g" path="res://army_2.tscn" id="17_i7x14"]
-[ext_resource type="PackedScene" uid="uid://dc26fscilb6vm" path="res://bau/bau.tscn" id="17_x0xml"]
 [ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="23_sxxq7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7w75e"]
@@ -55,9 +55,6 @@ size = Vector2(10, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dkie"]
 size = Vector2(40, 10)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3uxbr"]
-load_path = "res://.godot/imported/undertale_text_box (1).png-d0166dbfcd252160d161ac7337dd542d.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldoe0"]
 texture = ExtResource("10_t5w7k")
@@ -4179,17 +4176,17 @@ metadata/_edit_use_anchors_ = true
 [node name="jungcookheathbar" type="ProgressBar" parent="character/Camera2D/Control"]
 modulate = Color(0.806922, 0, 0.0702443, 1)
 layout_mode = 0
-offset_left = 393.0
-offset_top = 114.0
-offset_right = 723.0
-offset_bottom = 141.0
+offset_left = 469.0
+offset_top = 109.0
+offset_right = 674.0
+offset_bottom = 122.0
 max_value = 500.0
 value = 500.0
 show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="character/Camera2D/Control"]
-position = Vector2(560, 124)
-scale = Vector2(0.5, 0.7)
+position = Vector2(570, 114)
+scale = Vector2(0.307317, 0.453916)
 texture = ExtResource("11_heiw1")
 
 [node name="Dialogo" type="Control" parent="character/Camera2D"]
@@ -4198,14 +4195,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Timer" type="Timer" parent="character/Camera2D/Dialogo"]
+wait_time = 4.5
+autostart = true
+
 [node name="MessageBox" type="Sprite2D" parent="character/Camera2D/Dialogo"]
 position = Vector2(0, 127)
 scale = Vector2(0.4, 0.4)
-texture = SubResource("CompressedTexture2D_3uxbr")
+texture = ExtResource("12_ati5c")
 script = ExtResource("13_46f8m")
-
-[node name="Timer" type="Timer" parent="character/Camera2D/Dialogo/MessageBox"]
-wait_time = 4.5
 
 [node name="tiles" type="Node" parent="."]
 
@@ -4259,8 +4257,6 @@ wait_time = 8.0
 [node name="army1" parent="." instance=ExtResource("13_k3i2b")]
 position = Vector2(818, -179)
 
-[node name="Bau" parent="." instance=ExtResource("17_x0xml")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HeartsContainer" type="HBoxContainer" parent="CanvasLayer"]
@@ -4289,7 +4285,7 @@ texture = ExtResource("23_sxxq7")
 [connection signal="area_entered" from="character/link/hitbox" to="jungcook" method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="character/link/hitbox" to="character/link" method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="character/sword/Area2D" to="jungcook" method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="character/Camera2D/Dialogo/MessageBox/Timer" to="character/Camera2D/Dialogo/MessageBox" method="_on_timer_timeout"]
+[connection signal="timeout" from="character/Camera2D/Dialogo/Timer" to="character/Camera2D/Dialogo/MessageBox" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer" to="jungcook" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer2" to="jungcook" method="_on_timer_2_timeout"]
 [connection signal="body_entered" from="jungcook/hitboc" to="character/link" method="_on_hitboc_body_entered"]
