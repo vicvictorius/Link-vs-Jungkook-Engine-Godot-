@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bif6caisusvmg"]
+[gd_scene load_steps=41 format=3 uid="uid://bif6caisusvmg"]
 
 [ext_resource type="Texture2D" uid="uid://bfacs8unjt1ch" path="res://sprites/hyrule field.png" id="1_3nasj"]
 [ext_resource type="Texture2D" uid="uid://dpa4c0g3rmoxe" path="res://sprites/tilesets/download.jpg" id="2_8m6nw"]
@@ -22,7 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://bvcwdq7fmxc5u" path="res://sprites/master_sword.png" id="10_sx5bp"]
 [ext_resource type="Texture2D" uid="uid://dds0sudm58jb5" path="res://sprites/tilesets/galinha marrom.png" id="10_ypojn"]
 [ext_resource type="Script" path="res://door.gd" id="11_0vy8x"]
-[ext_resource type="AudioStream" uid="uid://dk16w3308uqw" path="res://sounds/06 Kokiri Forest.mp3" id="17_s5jb8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m2i0g"]
 texture = ExtResource("1_3nasj")
@@ -16667,11 +16666,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ghh8"]
 size = Vector2(10, 38)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xpr0"]
-size = Vector2(40, 10)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42u7e"]
 size = Vector2(63, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0fx8"]
+size = Vector2(40, 10)
 
 [node name="Node2D" type="Node2D"]
 
@@ -16716,21 +16715,6 @@ position = Vector2(-23, 0.99999)
 scale = Vector2(0.86719, 0.86719)
 texture = ExtResource("8_3r3b0")
 
-[node name="sword" type="CharacterBody2D" parent="."]
-position = Vector2(563, 306)
-script = ExtResource("9_rw3fj")
-
-[node name="Sprite2D" type="Sprite2D" parent="sword"]
-texture_filter = 1
-position = Vector2(39.4875, -0.057518)
-rotation = 0.789106
-scale = Vector2(0.657217, 0.657217)
-texture = ExtResource("10_sx5bp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
-position = Vector2(45, 0)
-shape = SubResource("RectangleShape2D_6xpr0")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(566, 277)
 script = ExtResource("2_v53y5")
@@ -16742,5 +16726,28 @@ script = ExtResource("11_0vy8x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door"]
 position = Vector2(-1.5, 0)
 shape = SubResource("RectangleShape2D_42u7e")
+
+[node name="sword" type="CharacterBody2D" parent="."]
+position = Vector2(820, 637)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("9_rw3fj")
+
+[node name="Sprite2D" type="Sprite2D" parent="sword"]
+texture_filter = 1
+position = Vector2(39.4875, -0.057518)
+rotation = 0.789106
+scale = Vector2(0.657217, 0.657217)
+texture = ExtResource("10_sx5bp")
+
+[node name="Area2D" type="Area2D" parent="sword"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sword/Area2D"]
+position = Vector2(45, 0)
+shape = SubResource("RectangleShape2D_u0fx8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
+position = Vector2(45, 0)
+shape = SubResource("RectangleShape2D_u0fx8")
 
 [connection signal="body_entered" from="door" to="door" method="_on_body_entered"]
