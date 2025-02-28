@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://hx3b7j5ye77d"]
+[gd_scene load_steps=34 format=3 uid="uid://hx3b7j5ye77d"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="2_epnql"]
 [ext_resource type="Texture2D" uid="uid://77p6hi3uko3s" path="res://sprites/link meu.png" id="3_ductp"]
 [ext_resource type="Texture2D" uid="uid://dhjs8clwka2yq" path="res://sprites/link passo 1.png" id="4_onfic"]
 [ext_resource type="AudioStream" uid="uid://dqdpaq2jonlsc" path="res://sounds/duel of fates.mp3" id="5_d3epk"]
 [ext_resource type="Texture2D" uid="uid://ejakk5kepfje" path="res://sprites/link passo 2.png" id="5_spxsl"]
+[ext_resource type="Script" path="res://audio_stream_player_2d.gd" id="6_ohpcx"]
 [ext_resource type="Script" path="res://shield.gd" id="6_ok7t2"]
 [ext_resource type="Texture2D" uid="uid://b0edk0kd5jbb6" path="res://sprites/shield.png" id="7_8wol7"]
 [ext_resource type="Script" path="res://sword.gd" id="8_qmils"]
@@ -19,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bvrjhh8yy2th7" path="res://undertale_text_box (1).png" id="12_ati5c"]
 [ext_resource type="PackedScene" uid="uid://crv57hvmknxib" path="res://bullet.tscn" id="12_wg03p"]
 [ext_resource type="Script" path="res://message_box.gd" id="13_46f8m"]
+[ext_resource type="AudioStream" uid="uid://b3cooxyliy5tu" path="res://jungkook-tts-file.mp3" id="13_c37fm"]
 [ext_resource type="PackedScene" uid="uid://b7eg10gk3t68i" path="res://army_1.tscn" id="13_k3i2b"]
 [ext_resource type="PackedScene" uid="uid://b3y5c2l86l02g" path="res://army_2.tscn" id="17_i7x14"]
 [ext_resource type="Texture2D" uid="uid://c42k0rr4kvtk0" path="res://Imagens and gifs UI UX/R.png" id="23_sxxq7"]
@@ -4119,7 +4121,7 @@ shape = SubResource("CircleShape2D_ya6tt")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="character/link"]
 stream = ExtResource("5_d3epk")
-autoplay = true
+script = ExtResource("6_ohpcx")
 
 [node name="shield" type="CharacterBody2D" parent="character"]
 position = Vector2(820, 638)
@@ -4136,29 +4138,6 @@ texture_filter = 1
 position = Vector2(-23, 0.99999)
 scale = Vector2(0.86719, 0.86719)
 texture = ExtResource("7_8wol7")
-
-[node name="sword" type="CharacterBody2D" parent="character"]
-position = Vector2(820, 637)
-collision_layer = 7
-collision_mask = 7
-script = ExtResource("8_qmils")
-
-[node name="Sprite2D" type="Sprite2D" parent="character/sword"]
-texture_filter = 1
-position = Vector2(39.4875, -0.057518)
-rotation = 0.789106
-scale = Vector2(0.657217, 0.657217)
-texture = ExtResource("9_utbc6")
-
-[node name="Area2D" type="Area2D" parent="character/sword"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="character/sword/Area2D"]
-position = Vector2(45, 0)
-shape = SubResource("RectangleShape2D_2dkie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="character/sword"]
-position = Vector2(45, 0)
-shape = SubResource("RectangleShape2D_2dkie")
 
 [node name="Camera2D" type="Camera2D" parent="character"]
 position = Vector2(823, 608)
@@ -4195,15 +4174,38 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Timer" type="Timer" parent="character/Camera2D/Dialogo"]
-wait_time = 4.5
-autostart = true
-
 [node name="MessageBox" type="Sprite2D" parent="character/Camera2D/Dialogo"]
 position = Vector2(0, 127)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("12_ati5c")
 script = ExtResource("13_46f8m")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="character/Camera2D/Dialogo"]
+stream = ExtResource("13_c37fm")
+autoplay = true
+
+[node name="sword" type="CharacterBody2D" parent="character"]
+position = Vector2(820, 637)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("8_qmils")
+
+[node name="Sprite2D" type="Sprite2D" parent="character/sword"]
+texture_filter = 1
+position = Vector2(39.4875, -0.057518)
+rotation = 0.789106
+scale = Vector2(0.657217, 0.657217)
+texture = ExtResource("9_utbc6")
+
+[node name="Area2D" type="Area2D" parent="character/sword"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="character/sword/Area2D"]
+position = Vector2(45, 0)
+shape = SubResource("RectangleShape2D_2dkie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="character/sword"]
+position = Vector2(45, 0)
+shape = SubResource("RectangleShape2D_2dkie")
 
 [node name="tiles" type="Node" parent="."]
 
@@ -4284,8 +4286,9 @@ texture = ExtResource("23_sxxq7")
 [connection signal="area_entered" from="character/link/hitbox" to="character/link" method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="character/link/hitbox" to="jungcook" method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="character/link/hitbox" to="character/link" method="_on_hitbox_body_entered"]
+[connection signal="finished" from="character/Camera2D/Dialogo/AudioStreamPlayer2D" to="character/link/AudioStreamPlayer2D" method="_on_audio_stream_player_2d_finished"]
+[connection signal="finished" from="character/Camera2D/Dialogo/AudioStreamPlayer2D" to="character/Camera2D/Dialogo/MessageBox" method="_on_audio_stream_player_2d_finished"]
 [connection signal="body_entered" from="character/sword/Area2D" to="jungcook" method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="character/Camera2D/Dialogo/Timer" to="character/Camera2D/Dialogo/MessageBox" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer" to="jungcook" method="_on_timer_timeout"]
 [connection signal="timeout" from="jungcook/Timer2" to="jungcook" method="_on_timer_2_timeout"]
 [connection signal="body_entered" from="jungcook/hitboc" to="character/link" method="_on_hitboc_body_entered"]

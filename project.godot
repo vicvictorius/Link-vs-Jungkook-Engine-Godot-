@@ -21,6 +21,8 @@ SignalBus="*res://Dialogo/SignalBus.gd"
 
 [display]
 
+window/size/mode=3
+window/stretch/mode="viewport"
 window/stretch/scale=2.0
 
 [input]

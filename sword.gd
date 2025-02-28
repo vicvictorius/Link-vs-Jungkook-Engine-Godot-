@@ -6,7 +6,7 @@ var base_offset = deg_to_rad(-75)
 var total_rotation = 0.0  
 var max_rotation = deg_to_rad(130)  
 
-@onready var link = $"../link"  
+@onready var link = $"../link"
 @onready var sprite = $Sprite2D  
 @onready var collision = $CollisionShape2D  
 @onready var area2d = $Area2D
