@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://gt4nio242ihc"
+path="res://.godot/imported/gg rapeize.mp3-0d6fc5f7649f27f802505d2be2a11108.mp3str"
+
+[deps]
+
+source_file="res://sounds/gg rapeize.mp3"
+dest_files=["res://.godot/imported/gg rapeize.mp3-0d6fc5f7649f27f802505d2be2a11108.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

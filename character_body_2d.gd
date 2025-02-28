@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
 const SPEED = 300.0  # Velocidade de movimento
-var hp = 30
+var hp = 60
 
 @onready var animated_sprite = $AnimatedSprite2D 
+@export var hearts_container: HBoxContainer
+@onready var death_scene: String = "res://game_over.tscn"
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
@@ -32,7 +34,7 @@ func _physics_process(delta: float) -> void:
 
 func death():
 	if hp <= 0:
-		queue_free()
+		get_tree().change_scene_to_file(death_scene)
 		print("personagem destruido!")
 
 	# Faz o personagem olhar para o mouse com um offset de 90 graus
@@ -59,9 +61,27 @@ func look_at_mouse():
 func damage(dano):
 	hp -= dano
 	print("Dano recebido:", dano, " | HP restante:", hp)  # Debug
-
 	# Pisca vermelho ao tomar dano
 	flash_red()
+	update_hearts()
+
+func update_hearts():
+	if not hearts_container:
+		print("bah")
+		return
+	var heart_value = 15  # Cada coração vale 15 HP
+	var current_hearts: int
+	if hp <= 0:
+		current_hearts = 0
+	else:
+		current_hearts = ceil(float(hp) / heart_value)
+		current_hearts = min(current_hearts, 4)  # Máximo de 4 corações
+	
+	# Atualiza a visibilidade de cada coração
+	for i in range(hearts_container.get_child_count()):
+		var heart = hearts_container.get_child(i)
+		heart.visible = (i < current_hearts)
+
 
 func flash_red():
 	animated_sprite.modulate = Color(1, 0.3, 0.3)  # Fica avermelhado

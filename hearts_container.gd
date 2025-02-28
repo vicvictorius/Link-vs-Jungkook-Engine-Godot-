@@ -1,10 +1,10 @@
 extends Control  # Muda de Node2D para Control
 
 @onready var hearts = [
-	$hearts,
-	$hearts2,
-	$hearts3,
-	$hearts4
+	$CanvasLayer/HeartsContainer/hearts,
+	$CanvasLayer/HeartsContainer/hearts2,
+	$CanvasLayer/HeartsContainer/hearts3,
+	$CanvasLayer/HeartsContainer/hearts4
 ]
 
 func set_hearts(amount: int):
